@@ -6,7 +6,8 @@ class App extends Component {
 
 state = {
   StateText: '',
-  Outs: 'Outs'
+  Outs: 'Outs',
+  showCharComponent: false
 }
 textHandler = (event) => {
 this.setState( {
