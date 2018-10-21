@@ -16,6 +16,20 @@ this.setState( {
 })
 }
 
+clickHandler = (event) => {
+  this.setState({showCharComponent: true})
+}
+
+clickHandler2 = () => {
+  this.setState({showCharComponent: false})
+}
+
+
+
+deleteInstance = () => {
+
+}
+
   render() {
 
 const style = {
@@ -25,10 +39,17 @@ const style = {
   margin: '16 px',
   border: '1px solid black'
 };
+let Text = 'Hello' ;
 
-  let Text = 'Hello' ;
+
+let CharComponent = 'first character';
 
 let Outs = '';
+
+if (this.state.showCharComponent) {
+  let CharComponent = this.state.StateText[0];
+}
+
 
 let validation = () => {
   if (this.state.StateText.length >= 5) {
@@ -40,14 +61,11 @@ let validation = () => {
     else {
     Outs = (
       <div>
-       The text is not long enough.
+       The text is not long enough, motherfucker.
       </div>
   )}
 }
 
-let deleteInstance = () => {
-
-}
 
 
     return (
@@ -72,6 +90,10 @@ let deleteInstance = () => {
           <mp style = {style}>{Outs}</mp>
           <br></br>
           <np>{this.state.StateText[0]}</np>
+          <br></br>
+          <button >Button</button>
+          <br></br>
+          <np>{CharComponent}</np>
 
       </div>
     );
