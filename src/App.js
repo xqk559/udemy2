@@ -5,7 +5,8 @@ import './App.css';
 class App extends Component {
 
 state = {
-  StateText: 'New State'
+  StateText: '',
+  Outs: 'Outs'
 }
 textHandler = (event) => {
 this.setState( {
@@ -14,12 +15,39 @@ this.setState( {
 })
 }
 
-
-
-
   render() {
 
-    let Text = 'Hello' ;
+const style = {
+  display: 'inline-block',
+  padding: '16px',
+  textalign: 'center',
+  margin: '16 px',
+  border: '1px solid black'
+};
+
+  let Text = 'Hello' ;
+
+let Outs = '';
+
+let validation = () => {
+  if (this.state.StateText.length >= 5) {
+    Outs = (
+      <div>
+       The text is long enough.
+      </div>
+    )}
+    else {
+    Outs = (
+      <div>
+       The text is not long enough.
+      </div>
+  )}
+}
+
+let deleteInstance = () => {
+
+}
+
 
     return (
 
@@ -27,18 +55,23 @@ this.setState( {
 
           <input type="text" onChange={this.textHandler}/>
           <br></br>
+          <np>{validation()}</np>
           <np>{Text}</np>
           <br></br>
           <Text
             change = {this.textHandler}
             length = {this.state.StateText.length}
+            click = {() => this.deleteInstance}
             />
           <br></br>
-          <np>{this.state.StateText}</np>
+          <np style = {style}>{this.state.StateText}</np>
           <br></br>
-          <np>{this.state.StateText.length}</np>
+          <np >{this.state.StateText.length}</np>
           <br></br>
-        
+          <mp style = {style}>{Outs}</mp>
+          <br></br>
+          <np>{this.state.StateText[0]}</np>
+
       </div>
     );
   }
