@@ -7,30 +7,22 @@ class App extends Component {
 state = {
   StateText: '',
   Outs: 'Outs',
-  showCharComponent: true,
-  showChar: false
+  showChar: true
 }
 
 textHandler = (event) => {
 this.setState( {
   StateText: event.target.value,
-  length: null
+  length: null,
 })
 }
 
-clickHandler = () => {
-  this.setState({showChar: true})
+ClickHandler = (event) => {
+  this.setState( {
+    showChar: false
+  });
 }
 
-clickHandler2 = () => {
-  this.setState({showChar: false})
-}
-
-
-
-deleteInstance = () => {
-
-}
 
   render() {
 
@@ -54,14 +46,17 @@ let Array1 = Array.from(this.state.StateText);
 
 
 const Char = (props) => {
-  return (<div style ={style}>
+  return (<div style ={style} >
     {props.character}
+
     </div>)
 };
 
 const CharList = Array1.map(ch => {
   return <Char
-            character ={ch} />;
+            character ={ch}
+            click={() => this.ClickHandler()}
+            />;
 });
 
 
@@ -88,6 +83,16 @@ let validation = () => {
   )}
 }
 
+let Cha = '';
+
+let shower = () => {
+  if (this.state.showChar === true) {
+    Cha = (<div style={style}>{CharList}</div>)
+  }
+  else {
+    Cha = (<div>nothing</div>);
+  }
+}
 
 
     return (
@@ -96,8 +101,9 @@ let validation = () => {
 
           <input type="text" onChange={this.textHandler}/>
           <br></br>
+          <nf>{shower()}</nf>
           <np>{validation()}</np>
-          <np>{Text}</np>
+          <np></np>
           <br></br>
           <Text
             change = {this.textHandler}
@@ -113,12 +119,12 @@ let validation = () => {
           <br></br>
           <np>{this.state.StateText[0]}</np>
           <br></br>
-          <button >This Motherfucker Right Here</button>
+          <button onClick={this.ClickHandler}>This Motherfucker Right Here</button>
           <br></br>
           <np style = {style}>{CharList}</np>
           <br></br>
           <br></br>
-          <p>
+          <p onClick={this.ClickHandler}>{Cha}
           </p>
 
       </div>
