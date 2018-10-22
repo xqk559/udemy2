@@ -7,8 +7,10 @@ class App extends Component {
 state = {
   StateText: '',
   Outs: 'Outs',
-  showCharComponent: false
+  showCharComponent: true,
+  showChar: false
 }
+
 textHandler = (event) => {
 this.setState( {
   StateText: event.target.value,
@@ -16,12 +18,12 @@ this.setState( {
 })
 }
 
-clickHandler = (event) => {
-  this.setState({showCharComponent: true})
+clickHandler = () => {
+  this.setState({showChar: true})
 }
 
 clickHandler2 = () => {
-  this.setState({showCharComponent: false})
+  this.setState({showChar: false})
 }
 
 
@@ -35,18 +37,38 @@ deleteInstance = () => {
 const style = {
   display: 'inline-block',
   padding: '16px',
-  textalign: 'center',
+  textAlign: 'center',
   margin: '16 px',
   border: '1px solid black'
 };
 let Text = 'Hello' ;
 
+this.state.StateText.split('');
 
-let CharComponent = 'first character';
+
+let CharComponent = this.state.StateText.split('');
 
 let Outs = '';
 
-if (this.state.showCharComponent) {
+let Array1 = Array.from(this.state.StateText);
+
+
+const Char = (props) => {
+  return (<div style ={style}>
+    {props.character}
+    </div>)
+};
+
+const CharList = Array1.map(ch => {
+  return <Char
+            character ={ch} />;
+});
+
+
+
+
+
+if (this.state.showCharComponent === true) {
   let CharComponent = this.state.StateText[0];
 }
 
@@ -91,9 +113,13 @@ let validation = () => {
           <br></br>
           <np>{this.state.StateText[0]}</np>
           <br></br>
-          <button >Button</button>
+          <button >This Motherfucker Right Here</button>
           <br></br>
-          <np>{CharComponent}</np>
+          <np style = {style}>{CharList}</np>
+          <br></br>
+          <br></br>
+          <p>
+          </p>
 
       </div>
     );
