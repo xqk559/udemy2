@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Radium, { StyleRoot } from 'radium';
 
 class App extends Component {
 
@@ -27,12 +28,22 @@ ClickHandler = (event) => {
   render() {
 
 const style = {
+  backgroundColor: 'green',
   display: 'inline-block',
+  color: 'white',
   padding: '16px',
   textAlign: 'center',
   margin: '16 px',
-  border: '1px solid black'
+  border: '1px solid black',
+  ':hover':{
+    backgroundColor: 'lightgreen',
+    color: 'black'
+  }
 };
+
+
+
+
 let Text = 'Hello' ;
 
 this.state.StateText.split('');
@@ -52,7 +63,13 @@ let DeleteCharHandler = (index) => {
 }
 
 const Char = (props) => {
-  return (<div style ={style} onClick={props.click}>
+    const style = {
+      '@media (min-width 500px)': {
+        width: '450px'
+      }
+    }
+
+  return (<div style ={style } onClick={props.click} key="key5">
     {props.character}
 
     </div>)
@@ -81,7 +98,14 @@ let validation = () => {
       <div>
        The text is long enough.
       </div>
-    )}
+    )
+style.backgroundColor = 'red';
+style.hover = {
+  backgroundColor: 'salmon',
+  color: 'black'
+}
+
+  }
     else {
     Outs = (
       <div>
@@ -90,11 +114,21 @@ let validation = () => {
   )}
 }
 
+let classes = [];
+if (this.state.StateText.length <=2){
+  classes.push('red');
+}
+if(this.state.StateText.length<=1){
+  classes.push('bold');
+}
+
+
+
 let Cha = '';
 
 let shower = () => {
   if (this.state.showChar === true) {
-    Cha = (<div style={style}>{CharList}</div>)
+    Cha = (<div   key="key1">{CharList}</div>)
   }
   else {
     Cha = (<div>nothing</div>);
@@ -103,6 +137,8 @@ let shower = () => {
 
 
     return (
+<StyleRoot>
+
 
       <div className="App">
 
@@ -118,17 +154,22 @@ let shower = () => {
             click = {() => this.deleteInstance}
             />
           <br></br>
-          <np style = {style}>{this.state.StateText}</np>
+          <np style = {style}  key="key2">{this.state.StateText}</np>
+          <br></br>
+          <div style = {style} key="key6">Hardstyles!</div>
+          <br></br>
+          <np className={classes.join(' ')}>Christmas Text!</np>
+          <br></br>
           <br></br>
           <np >{this.state.StateText.length}</np>
           <br></br>
-          <mp style = {style}>{Outs}</mp>
+          <mp style = {style}  key="key3">{Outs}</mp>
           <br></br>
           <np>{this.state.StateText[0]}</np>
           <br></br>
           <button onClick={this.ClickHandler}>This Motherfucker Right Here</button>
           <br></br>
-          <np style = {style}>{CharList}</np>
+          <np style = {style} key="key4">{CharList}</np>
           <br></br>
           <br></br>
           <p onClick={this.ClickHandler}>{Cha}
@@ -136,8 +177,11 @@ let shower = () => {
           <np>{Char}</np>
 
       </div>
+
+
+</StyleRoot>
     );
   }
 }
 
-export default App;
+export default Radium(App);
